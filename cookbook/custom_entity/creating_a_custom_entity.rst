@@ -1,36 +1,39 @@
-How to Create a Custom Entity and the Screens to Manage it
-==========================================================
-
-.. note::
-    The code inside this cookbook entry is visible in src directory, you can copy/paste the code in your installed PIM (or do a symlink) to use it
-
-.. note::
-    The code inside this cookbook entry requires you to install the `akeneo/custom-entity-bundle`_ package.
-
+Create a Custom Entity and the Grid to Manage it
+===================================================
+  
 Creating the Entity
 -------------------
+We wiil start by creating a classic doctrine entity wich extends one of the entity provided by CustomEntityBundle. 
 
-
-As Akeneo relies heavily on standard tools like Doctrine, creating the entity is
-quite straightforward for any developer with Doctrine experience.
-
-.. literalinclude:: ../../src/Acme/Bundle/CatalogBundle/Entity/Color.php
+.. literalinclude:: ../../src/Acme/Bundle/CatalogBundle/Entity/Supplier.php
    :language: php
-   :prepend: # /src/Acme/Bundle/CatalogBundle/Entity/Color.php
+   :prepend: # /src/Acme/Bundle/CatalogBundle/Entity/Supplier.php
    :linenos:
 
-.. literalinclude:: ../../src/Acme/Bundle/CatalogBundle/Resources/config/doctrine/Color.orm.yml
+.. literalinclude:: ../../src/Acme/Bundle/CatalogBundle/Entity/SupplierTranslation.php
+   :language: php
+   :prepend: # /src/Acme/Bundle/CatalogBundle/Entity/SupplierTranslation.php
+   :linenos:
+
+.. literalinclude:: ../../src/Acme/Bundle/CatalogBundle/Resources/config/doctrine/Supplier.orm.yml
    :language: yaml
-   :prepend: # /src/Acme/Bundle/CatalogBundle/Resources/config/doctrine/Color.orm.yml
+   :prepend: # /src/Acme/Bundle/CatalogBundle/Resources/config/doctrine/Supplier.orm.yml
+   :linenos:
+
+.. literalinclude:: ../../src/Acme/Bundle/CatalogBundle/Resources/config/doctrine/SupplierTranslation.orm.yml
+   :language: yaml
+   :prepend: # /src/Acme/Bundle/CatalogBundle/Resources/config/doctrine/SupplierTranslation.orm.yml
    :linenos:
 
 .. note::
-    To ease the integration of the entity in the PIM, we extended an abstract class from CustomEntityBundle.
+    The extended CustonEntityBundle class provides a code and a translatable label attribute. 
     Several abstract entity and repositories are available in this bundle to help you with different
     requirements.
 
-Creating the Entity Management Screens
---------------------------------------
+    These following classes are documented in `GitHub project repository <https://github.com/akeneo/CustomEntityBundle/blob/v1.5.0-RC1/Resources/doc/abstract_entities_and_repositories.rst>`_.
+
+Creating the Entity Management
+------------------------------
 The Grid
 ********
 
@@ -43,17 +46,22 @@ you can define the vendor grid as following:
    :linenos:
 
 
-Creating the Form Type for this Entity
-**************************************
+The Form Type
+*************
 
 .. literalinclude:: ../../src/Acme/Bundle/EnrichBundle/Form/Type/ColorType.php
    :language: php
    :prepend: # /src/Acme/Bundle/EnrichBundle/Form/Type/ColorType.php
    :linenos:
 
+.. literalinclude:: ../../src/Acme/Bundle/EnrichBundle/Resources/config/form_types.yml
+   :language: yaml
+   :prepend: # /src/Acme/Bundle/EnrichBundle/Resources/config/form_types.yml
+   :linenos:
 
-Creating the CRUD
-*****************
+
+The CRUD
+********
 
 A complete CRUD can be easily obtained by adding a custom_entities.yml file in one of your bundles.
 

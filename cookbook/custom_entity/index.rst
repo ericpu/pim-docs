@@ -1,29 +1,37 @@
-How to Create a Custom Entity
+How to create Custom Entities
 =============================
-
-Why Create a Custom Entity?
-----------------------------
 
 In some cases, you may need to manage different entities than the one natively
 provided by Akeneo and link them to the products.
 
-.. note::
-    if you do not need to use your custom entity as an attribute, follow
-    only the first part of this cookbook's recipe.
+For example, if your products are provided by suppliers, you may want them
+to be selected in the product edit form as a simple select list.
+
+You'd use an attribute called **Supplier** containing the full list of suppliers.
+
+Suppose now that you want to have extra informations for each suppliers, such as :
+ * code
+ * name of the supplier
+ * contact informations (phone numer, adress, mail)
+ * country
+ * logo
+
+You can't perform this with an attribute. Here come the custom entities!
+
+In this cookbook, you will learn how to:
+ * :doc:`installation`
+ * :doc:`creating_a_custom_entity`
+ * Link products to a custom entity
+ * Link a custom entity to another custom entity 
+ * Validation of custom entity
+ * Set ACLs
+ * Use Historization
+ * Perform Imports and Exports
 
 .. note::
-    API documentation of the Custom Entity Bundle: https://github.com/akeneo/CustomEntityBundle/blob/master/Resources/doc/index.rst
+   All the code from this cookbook is available in the example folder of the
+   Custom Entity Bundle GitHub repository.
 
-For example, let's say we want to create a more advanced manufacturer entity
-than using a standard attribute option, because the manufacturer needs
-specific attribute itself like the manufacturing country.
-
-* Creating the entity and the associated screens
-    * :doc:`creating_a_custom_entity`
-
-* Creating an attribute type linked to this custom entity
-    * :doc:`creating_an_attribute_type`
-
-* Importing your custom entity
-    * :doc:`importing_custom_entities`
-
+.. note::
+    API documentation of the Custom Entity Bundle:
+    https://github.com/akeneo/CustomEntityBundle/blob/master/Resources/doc/index.rst
