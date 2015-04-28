@@ -37,6 +37,10 @@ class CapitalizeValuesProcessor extends AbstractMassEditProcessor
      */
     public function process($product)
     {
+        // This is where you put your custom logic. Here we work on a
+        // $product the Reader gave us.
+
+        // This is the configuration we receive from our Operation
         $configuration = $this->getJobConfiguration();
 
         if (!array_key_exists('actions', $configuration)) {
@@ -45,23 +49,32 @@ class CapitalizeValuesProcessor extends AbstractMassEditProcessor
 
         $actions = $configuration['actions'];
 
-        //Put your custom logic here
-        $capitalizedValue = strtoupper($product->getValue($actions[0]['field'], $localeCode = null, $scopeCode = null)->getData());
-        $actions[0]['value'] = $capitalizedValue;
+        // Retrieve custom config from the action
+        $field   = $actions[0]['field'];
+        $options = $actions[0]['options'];
 
+        // Capitalize the attribute value of the product
+        $originalValue = $product->getValue($field, $options['locale'], $options['code'])->getData();
+        $capitalizedValue = strtoupper($originalValue);
 
-        $this->setData($product, $actions);
+        // Use the updater to update the product
+        $this->setData($product, [
+            'field'   => $field,
+            'options' => $options,
+            'value'   => $capitalizedValue
+        ]);
 
+        // Validate the product
         if (null === $product || (null !== $product && !$this->isProductValid($product))) {
             $this->stepExecution->incrementSummaryInfo('skipped_products');
 
-            return null;
+            return null; // By returning null, the product won't be saved by the Writer
         }
 
+        // Used on the Reporting Screen to have a summary on the Mass Edit execution
         $this->stepExecution->incrementSummaryInfo('mass_edited');
 
-
-        return $product;
+        return $product; // Send the product to the Writer to be saved
     }
 
     /**

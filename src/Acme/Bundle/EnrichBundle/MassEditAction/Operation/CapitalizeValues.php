@@ -17,7 +17,7 @@ class CapitalizeValues extends AbstractMassEditOperation
      */
     public function getFormType()
     {
-        return 'pim_enrich_operation_capitalize_values';
+        return 'acme_enrich_operation_capitalize_values';
     }
 
     /**
