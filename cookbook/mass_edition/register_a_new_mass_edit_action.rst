@@ -153,7 +153,7 @@ We just wrote the Processor in the previous phase, so let's tell the Job which s
 
 The Job have to be in your database, so add it to the fixtures:
 
-.. literalinclude:: ../../src/Acme/Bundle/InstallBundle/Resources/fixtures/icecat_demo_dev/jobs.yml
+.. literalinclude:: ../../src/Acme/Bundle/EnrichBundle/Resources/fixtures/jobs.yml
     :language: yaml
-    :prepend: # /src/Acme/Bundle/EnrichBundle/Resources/fixtures/icecat_demo_dev/jobs.yml
+    :prepend: # /src/Acme/Bundle/EnrichBundle/Resources/fixtures/jobs.yml
     :linenos:
